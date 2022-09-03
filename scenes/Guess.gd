@@ -8,6 +8,8 @@ onready var red_picker = $Red/LineEdit
 onready var green_picker = $Green/LineEdit
 onready var blue_picker = $Blue/LineEdit
 
+onready var swatch = $Swatch
+
 var guess_made := false setget set_guess_made
 func set_guess_made(val):
 	guess_made = val
@@ -16,6 +18,8 @@ func set_guess_made(val):
 	self.red_picker.editable = false
 	self.green_picker.editable = false
 	self.blue_picker.editable = false
+
+
 
 func get_rgb_vals() -> Array:
 	return [
@@ -38,3 +42,11 @@ func update_guess_results(results: Array):
 
 	for i in results.size():
 		result_icons[i].set_icon(results[i])
+
+	var color = Color()
+
+	color.r8 = self.red_picker.value
+	color.g8 = self.green_picker.value
+	color.b8 = self.blue_picker.value
+
+	self.swatch.color = color
