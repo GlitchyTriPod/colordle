@@ -1,0 +1,82 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://old/Guess.gd" type="Script" id=2]
+[ext_resource path="res://scenes/ResultIcon.tscn" type="PackedScene" id=3]
+[ext_resource path="res://res/ClearSans-Regular.ttf" type="DynamicFontData" id=4]
+[ext_resource path="res://scenes/input.gd" type="Script" id=5]
+
+[sub_resource type="DynamicFont" id=4]
+size = 31
+extra_spacing_top = -24
+extra_spacing_bottom = -20
+font_data = ExtResource( 4 )
+
+[sub_resource type="Theme" id=3]
+default_font = SubResource( 4 )
+LineEdit/constants/minimum_spaces = 8
+LineEdit/fonts/font = SubResource( 4 )
+
+[node name="Guess" type="HBoxContainer"]
+anchor_right = 1.0
+rect_min_size = Vector2( 0, 76 )
+size_flags_horizontal = 5
+custom_constants/separation = 27
+alignment = 1
+script = ExtResource( 2 )
+
+[node name="Red" type="HBoxContainer" parent="."]
+margin_left = 174.0
+margin_right = 280.0
+margin_bottom = 76.0
+
+[node name="LineEdit" type="SpinBox" parent="Red"]
+margin_right = 106.0
+margin_bottom = 76.0
+theme = SubResource( 3 )
+max_value = 256.0
+value = 256.0
+rounded = true
+align = 1
+script = ExtResource( 5 )
+
+[node name="ResultIcon" parent="Red" instance=ExtResource( 3 )]
+position = Vector2( -20, 46 )
+
+[node name="Green" type="HBoxContainer" parent="."]
+margin_left = 307.0
+margin_right = 413.0
+margin_bottom = 76.0
+
+[node name="LineEdit" type="SpinBox" parent="Green"]
+margin_right = 106.0
+margin_bottom = 76.0
+theme = SubResource( 3 )
+max_value = 256.0
+align = 1
+script = ExtResource( 5 )
+
+[node name="ResultIcon" parent="Green" instance=ExtResource( 3 )]
+position = Vector2( -17, 46 )
+
+[node name="Blue" type="HBoxContainer" parent="."]
+margin_left = 440.0
+margin_right = 546.0
+margin_bottom = 76.0
+
+[node name="LineEdit" type="SpinBox" parent="Blue"]
+margin_right = 106.0
+margin_bottom = 76.0
+theme = SubResource( 3 )
+max_value = 256.0
+align = 1
+script = ExtResource( 5 )
+
+[node name="ResultIcon" parent="Blue" instance=ExtResource( 3 )]
+position = Vector2( -17, 46 )
+
+[node name="Swatch" type="ColorRect" parent="."]
+visible = false
+margin_left = 525.0
+margin_right = 593.0
+margin_bottom = 68.0
+rect_min_size = Vector2( 68, 68 )

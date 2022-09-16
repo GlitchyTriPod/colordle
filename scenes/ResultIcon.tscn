@@ -16,6 +16,7 @@ fill_from = Vector2( 0.5, 0.5 )
 fill_to = Vector2( 0.3, 0.1 )
 
 [sub_resource type="DynamicFont" id=3]
+size = 20
 font_data = ExtResource( 1 )
 
 [sub_resource type="Theme" id=4]
@@ -27,14 +28,14 @@ script = ExtResource( 2 )
 [node name="TextureRect" type="TextureRect" parent="."]
 margin_right = 128.0
 margin_bottom = 50.0
+rect_scale = Vector2( 1.04119, 0.637829 )
 texture = SubResource( 2 )
 
 [node name="Label" type="Label" parent="."]
 self_modulate = Color( 0, 0, 0, 1 )
-margin_left = 42.0
-margin_top = 12.0
-margin_right = 90.0
-margin_bottom = 35.0
+margin_left = -6.0
+margin_right = 144.0
+margin_bottom = 28.0
 grow_horizontal = 2
 size_flags_horizontal = 2
 size_flags_vertical = 0

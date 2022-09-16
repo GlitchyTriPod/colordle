@@ -1,104 +1,95 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=14 format=2]
 
-[ext_resource path="res://res/ClearSans-Bold.ttf" type="DynamicFontData" id=1]
-[ext_resource path="res://scenes/Guess.gd" type="Script" id=2]
-[ext_resource path="res://scenes/ResultIcon.tscn" type="PackedScene" id=3]
-[ext_resource path="res://res/ClearSans-Regular.ttf" type="DynamicFontData" id=4]
-[ext_resource path="res://scenes/input.gd" type="Script" id=5]
+[ext_resource path="res://styles/green_input.tres" type="StyleBox" id=1]
+[ext_resource path="res://styles/blue_input.tres" type="StyleBox" id=2]
+[ext_resource path="res://styles/red_input.tres" type="StyleBox" id=3]
+[ext_resource path="res://res/ClearSans-Bold.ttf" type="DynamicFontData" id=4]
+[ext_resource path="res://scenes/Guess.gd" type="Script" id=5]
+[ext_resource path="res://res/img/downarrow.png" type="Texture" id=6]
+[ext_resource path="res://res/img/uparrow.png" type="Texture" id=7]
+[ext_resource path="res://scenes/ResultIcon.tscn" type="PackedScene" id=9]
+[ext_resource path="res://scenes/ColorGuess.gd" type="Script" id=10]
 
 [sub_resource type="DynamicFont" id=1]
-size = 50
-font_data = ExtResource( 1 )
-
-[sub_resource type="Theme" id=2]
-Label/fonts/font = SubResource( 1 )
-
-[sub_resource type="DynamicFont" id=4]
-size = 28
+size = 33
 font_data = ExtResource( 4 )
 
+[sub_resource type="StyleBoxFlat" id=2]
+
 [sub_resource type="Theme" id=3]
-default_font = SubResource( 4 )
-LineEdit/fonts/font = SubResource( 4 )
+Label/fonts/font = SubResource( 1 )
+Label/styles/normal = SubResource( 2 )
+
+[sub_resource type="SpriteFrames" id=4]
+animations = [ {
+"frames": [ ExtResource( 7 ), ExtResource( 6 ), null ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
 
 [node name="Guess" type="HBoxContainer"]
 anchor_right = 1.0
-custom_constants/separation = 27
+custom_constants/separation = 21
 alignment = 1
-script = ExtResource( 2 )
-
-[node name="Red" type="HBoxContainer" parent="."]
-margin_left = 26.0
-margin_right = 197.0
-margin_bottom = 68.0
-
-[node name="Label" type="Label" parent="Red"]
-margin_right = 45.0
-margin_bottom = 68.0
-theme = SubResource( 2 )
-text = "R:"
-
-[node name="LineEdit" type="SpinBox" parent="Red"]
-margin_left = 49.0
-margin_right = 171.0
-margin_bottom = 68.0
-theme = SubResource( 3 )
-max_value = 256.0
-align = 1
 script = ExtResource( 5 )
 
-[node name="ResultIcon" parent="Red" instance=ExtResource( 3 )]
-position = Vector2( 12, -22 )
-
-[node name="Green" type="HBoxContainer" parent="."]
-margin_left = 224.0
-margin_right = 399.0
-margin_bottom = 68.0
-
-[node name="Label" type="Label" parent="Green"]
-margin_right = 49.0
-margin_bottom = 68.0
-theme = SubResource( 2 )
-text = "G:"
-
-[node name="LineEdit" type="SpinBox" parent="Green"]
-margin_left = 53.0
-margin_right = 175.0
-margin_bottom = 68.0
+[node name="Red" type="Label" parent="."]
+margin_left = 219.0
+margin_right = 299.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 80, 50 )
 theme = SubResource( 3 )
-max_value = 256.0
+custom_styles/normal = ExtResource( 3 )
+text = "256"
 align = 1
-script = ExtResource( 5 )
+valign = 1
+script = ExtResource( 10 )
 
-[node name="ResultIcon" parent="Green" instance=ExtResource( 3 )]
-position = Vector2( 12, -22 )
+[node name="AnimatedSprite" type="AnimatedSprite" parent="Red"]
+position = Vector2( -3, 26 )
+scale = Vector2( 1.33733, 1.86194 )
+frames = SubResource( 4 )
 
-[node name="Blue" type="HBoxContainer" parent="."]
-margin_left = 426.0
-margin_right = 598.0
-margin_bottom = 68.0
+[node name="ResultIcon" parent="Red" instance=ExtResource( 9 )]
+position = Vector2( -29, 33 )
 
-[node name="Label" type="Label" parent="Blue"]
-margin_right = 46.0
-margin_bottom = 68.0
-theme = SubResource( 2 )
-text = "B:"
-
-[node name="LineEdit" type="SpinBox" parent="Blue"]
-margin_left = 50.0
-margin_right = 172.0
-margin_bottom = 68.0
+[node name="Green" type="Label" parent="."]
+margin_left = 320.0
+margin_right = 400.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 80, 50 )
 theme = SubResource( 3 )
-max_value = 256.0
+custom_styles/normal = ExtResource( 1 )
+text = "256"
 align = 1
-script = ExtResource( 5 )
+script = ExtResource( 10 )
+color = 1
 
-[node name="ResultIcon" parent="Blue" instance=ExtResource( 3 )]
-position = Vector2( 12, -22 )
+[node name="AnimatedSprite" type="AnimatedSprite" parent="Green"]
+position = Vector2( -3, 26 )
+scale = Vector2( 1.33733, 1.86194 )
+frames = SubResource( 4 )
 
-[node name="Swatch" type="ColorRect" parent="."]
-margin_left = 625.0
-margin_right = 693.0
-margin_bottom = 68.0
-rect_min_size = Vector2( 68, 68 )
-color = Color( 0.298039, 0.298039, 0.298039, 1 )
+[node name="ResultIcon" parent="Green" instance=ExtResource( 9 )]
+position = Vector2( -29, 33 )
+
+[node name="Blue" type="Label" parent="."]
+margin_left = 421.0
+margin_right = 501.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 80, 50 )
+theme = SubResource( 3 )
+custom_styles/normal = ExtResource( 2 )
+text = "256"
+align = 1
+script = ExtResource( 10 )
+color = 2
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="Blue"]
+position = Vector2( -3, 26 )
+scale = Vector2( 1.33733, 1.86194 )
+frames = SubResource( 4 )
+
+[node name="ResultIcon" parent="Blue" instance=ExtResource( 9 )]
+position = Vector2( -29, 33 )

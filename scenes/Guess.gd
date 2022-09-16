@@ -2,51 +2,20 @@ extends HBoxContainer
 
 class_name Guess
 
-onready var GuessResults = preload("res://enum/GuessResults.gd")
+onready var red = $Red as ColorGuess
+onready var green = $Green as ColorGuess
+onready var blue = $Blue as ColorGuess
 
-onready var red_picker = $Red/LineEdit
-onready var green_picker = $Green/LineEdit
-onready var blue_picker = $Blue/LineEdit
+func make_guess(guess: Dictionary):
 
-onready var swatch = $Swatch
+	while true:
+		if self.red == null || \
+			self.green == null || \
+			self.blue == null:
+			yield(get_tree(), "idle_frame")
+			continue
+		break
 
-var guess_made := false setget set_guess_made
-func set_guess_made(val):
-	guess_made = val
-	if !val:
-		return
-	self.red_picker.editable = false
-	self.green_picker.editable = false
-	self.blue_picker.editable = false
-
-
-
-func get_rgb_vals() -> Array:
-	return [
-		self.red_picker.value,
-		self.green_picker.value,
-		self.blue_picker.value
-	]
-
-func make_guess():
-	self.guess_made = true
-	return get_rgb_vals()
-
-func update_guess_results(results: Array):
-
-	var result_icons = [
-		$Red/ResultIcon,
-		$Green/ResultIcon,
-		$Blue/ResultIcon
-	]
-
-	for i in results.size():
-		result_icons[i].set_icon(results[i])
-
-	var color = Color()
-
-	color.r8 = self.red_picker.value
-	color.g8 = self.green_picker.value
-	color.b8 = self.blue_picker.value
-
-	self.swatch.color = color
+	self.red.update_guess(guess.red)
+	self.green.update_guess(guess.green)
+	self.blue.update_guess(guess.blue)

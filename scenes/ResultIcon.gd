@@ -16,7 +16,7 @@ func set_icon(result):
 			self.label.text = "perfect!"
 			self.texture.modulate = Color("#fff967")
 		GuessResults.GUESS_RESULTS.CLOSE:
-			self.label.text = "close enough!"
+			self.label.text = "close!"
 			self.texture.modulate = Color("#ffa34a")
 		GuessResults.GUESS_RESULTS.HOT:
 			self.label.text = "hot"

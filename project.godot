@@ -14,6 +14,16 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://ColorController.gd"
 }, {
+"base": "Label",
+"class": "ColorGuess",
+"language": "GDScript",
+"path": "res://scenes/ColorGuess.gd"
+}, {
+"base": "LineEdit",
+"class": "ColorInput",
+"language": "GDScript",
+"path": "res://scenes/ColorInput.gd"
+}, {
 "base": "Node",
 "class": "GameStateManager",
 "language": "GDScript",
@@ -29,6 +39,21 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://enum/GuessResults.gd"
 }, {
+"base": "HBoxContainer",
+"class": "Guess_old",
+"language": "GDScript",
+"path": "res://old/Guess.gd"
+}, {
+"base": "Node",
+"class": "InputController",
+"language": "GDScript",
+"path": "res://InputController.gd"
+}, {
+"base": "Button",
+"class": "NumInput",
+"language": "GDScript",
+"path": "res://scenes/NumInput.gd"
+}, {
 "base": "Node2D",
 "class": "ResultIcon",
 "language": "GDScript",
@@ -36,15 +61,20 @@ _global_script_classes=[ {
 } ]
 _global_script_class_icons={
 "ColorController": "",
+"ColorGuess": "",
+"ColorInput": "",
 "GameStateManager": "",
 "Guess": "",
 "GuessResults": "",
+"Guess_old": "",
+"InputController": "",
+"NumInput": "",
 "ResultIcon": ""
 }
 
 [application]
 
-config/name="Colordle"
+config/name="Hue Dat"
 run/main_scene="res://Main.tscn"
 config/icon="res://icon.png"
 
@@ -52,6 +82,9 @@ config/icon="res://icon.png"
 
 window/size/width=720
 window/size/height=1280
+window/size/test_width=480
+window/size/test_height=640
+window/handheld/orientation="portrait"
 window/stretch/mode="2d"
 window/stretch/aspect="expand"
 

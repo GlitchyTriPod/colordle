@@ -2,7 +2,8 @@ extends Node
 
 class_name GameStateManager
 
-onready var Guess = preload("res://scenes/guess.tscn")
+
+onready var Guess = preload("res://scenes/Guess.tscn")
 onready var GuessResults = preload("res://enum/GuessResults.gd")
 
 onready var guess_holder = get_parent().get_node("Control/Guesses")
@@ -11,7 +12,11 @@ onready var color_controller = get_parent().get_node("ColorController")
 onready var answer_lbl = get_parent().get_node("Control/Answer")
 onready var win_msg = get_parent().get_node("Control/WinMsg")
 
-onready var guess_btn = get_parent().get_node("Control/Button")
+onready var input_red = get_parent().get_node("Control/ColorInput/Red")
+onready var input_green = get_parent().get_node("Control/ColorInput/Green")
+onready var input_blue = get_parent().get_node("Control/ColorInput/Blue")
+
+onready var guess_btn = get_parent().get_node("Control/Inputs/Row3/Guess")
 
 var guess_count := 0 setget set_guess_count
 func set_guess_count(val):
@@ -20,41 +25,59 @@ func set_guess_count(val):
 		display_answer()
 		self.guess_btn.text = "Play Again?"
 
-# Called when the node enters the scene tree for the first time.
 func _ready():
-	add_new_guess()
+	for gues in self.guess_holder.get_children():
+		gues.queue_free()
 
-func add_new_guess():
-	if guess_count >= 6:
+func add_new_guess(guess_data: Dictionary):
+	if guess_count > 6:
 		return
 		
 	var guess = Guess.instance()
 
 	guess_holder.add_child(guess)
 
+	yield(get_tree(), "idle_frame")
+	
+	guess.make_guess(guess_data)
+
 func check_guess():
-	# find guess that has not been submitted, get guess informaiton
-	var guesses = guess_holder.get_children()
-
-	var guess_vals = null
-	var guess_node = null
-	for guess in guesses:
-		if !guess.guess_made:
-			guess_node = guess
-			guess_vals = guess.make_guess()
-			break
-
-	if guess_vals == null:
-		print("ERROR: no valid guess nodes were found")
-		return
+	# find guess that has not been submitted, get guess information
+	var guess_vals = [
+		int(self.input_red.text),
+		int(self.input_green.text),
+		int(self.input_blue.text)
+	]
 
 	var color_vals = self.color_controller.get_color_info_as_int()
 
 	var guess_results = []
 	for i in color_vals.size():
-		guess_results.push_back(compare_values(color_vals[i], guess_vals[i]))
+		guess_results.push_back(
+			compare_values(color_vals[i], guess_vals[i])
+		)
 
-	guess_node.update_guess_results(guess_results)
+	var guess_data = {
+		"red": {
+			"value": guess_vals[0],
+			"result": guess_results[0]
+		},
+		"green": {
+			"value": guess_vals[1],
+			"result": guess_results[1]
+		},
+		"blue": {
+			"value": guess_vals[2],
+			"result": guess_results[2]
+		},
+	}
+
+	# call color controller to add guess colors to swatches
+	var int_color = Color()
+	int_color.r8 = guess_vals[0]
+	int_color.g8 = guess_vals[1]
+	int_color.b8 = guess_vals[2]
+	self.color_controller.add_guess_color(int_color)
 
 	if guess_results.has(GuessResults.GUESS_RESULTS.COLD) || \
 	 guess_results.has(GuessResults.GUESS_RESULTS.COOL) || \
@@ -68,7 +91,7 @@ func check_guess():
 	else:
 		self.win_msg.text = "You win! Go for a Perfect!"
 
-	add_new_guess()
+	add_new_guess(guess_data)
 
 func compare_values(target_val, guess_val):
 	var diff = abs(target_val - guess_val)
@@ -107,7 +130,7 @@ func reset_game():
 	for i in guesses.size():
 		guesses[i].queue_free()
 
-	add_new_guess()
+	# add_new_guess()
 
 # make guess
 func _on_Button_button_up():
