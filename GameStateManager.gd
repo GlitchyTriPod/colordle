@@ -3,7 +3,7 @@ extends Node
 class_name GameStateManager
 
 
-onready var Guess = preload("res://scenes/Guess.tscn")
+onready var Guess = preload("res://scenes/guess.tscn")
 onready var GuessResults = preload("res://enum/GuessResults.gd")
 
 onready var guess_holder = get_parent().get_node("Control/Guesses")
