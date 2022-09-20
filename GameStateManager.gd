@@ -87,7 +87,7 @@ func check_guess():
 	elif !guess_results.has(GuessResults.GUESS_RESULTS.CLOSE):
 		self.win_msg.text = "Perfect win!"
 		self.guess_count = 6
-		return
+		# return
 	else:
 		self.win_msg.text = "You win! Go for a Perfect!"
 
@@ -125,12 +125,14 @@ func reset_game():
 	self.win_msg.text = ""
 	self.answer_lbl.text = ""
 
+	self.input_red.text = "0"
+	self.input_green.text = "0"
+	self.input_blue.text = "0"
+
 	var guesses = self.guess_holder.get_children()
 
 	for i in guesses.size():
 		guesses[i].queue_free()
-
-	# add_new_guess()
 
 # make guess
 func _on_Button_button_up():

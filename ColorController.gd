@@ -30,6 +30,13 @@ func update_color():
 		swatch.color = Color("#00ffffff")
 	self.latest_guess.self_modulate = Color("#00ffffff")
 
+	if OS.has_feature("debug"):
+		var tmp_str = "Color set to [ R: %s G: %s B: %s ]"
+
+		var colors = get_color_info_as_int()
+
+		print(tmp_str % [ str(colors[0]), str(colors[1]), str(colors[2])])
+
 func get_color_info_as_int():
 	return [
 		int(round(256.0 * self.target_red)),
