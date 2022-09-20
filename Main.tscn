@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=2]
+[gd_scene load_steps=34 format=2]
 
 [ext_resource path="res://res/ClearSans-Bold.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://ColorController.gd" type="Script" id=2]
@@ -12,6 +12,7 @@
 [ext_resource path="res://styles/select_default.tres" type="StyleBox" id=10]
 [ext_resource path="res://scenes/NumInput.gd" type="Script" id=11]
 [ext_resource path="res://InputController.gd" type="Script" id=12]
+[ext_resource path="res://guess_button_focus_handling.gd" type="Script" id=13]
 
 [sub_resource type="DynamicFont" id=1]
 size = 70
@@ -521,12 +522,13 @@ flat = true
 margin_left = 475.0
 margin_right = 623.0
 margin_bottom = 102.0
-focus_mode = 0
+focus_mode = 1
 theme = SubResource( 11 )
 custom_fonts/font = SubResource( 20 )
 custom_styles/focus = SubResource( 8 )
-enabled_focus_mode = 0
+enabled_focus_mode = 1
 text = "Guess!"
+script = ExtResource( 13 )
 
 [connection signal="number_selected" from="Control/Inputs/Row1/1" to="InputController" method="_on_number_selected"]
 [connection signal="number_selected" from="Control/Inputs/Row1/2" to="InputController" method="_on_number_selected"]
@@ -541,3 +543,4 @@ text = "Guess!"
 [connection signal="number_selected" from="Control/Inputs/Row3/9" to="InputController" method="_on_number_selected"]
 [connection signal="number_selected" from="Control/Inputs/Row3/0" to="InputController" method="_on_number_selected"]
 [connection signal="button_up" from="Control/Inputs/Row3/Guess" to="GameStateManager" method="_on_Button_button_up"]
+[connection signal="focus_entered" from="Control/Inputs/Row3/Guess" to="Control/Inputs/Row3/Guess" method="_on_Guess_focus_entered"]

@@ -7,18 +7,15 @@ export(int, "Red", "Green", "Blue") var color
 onready var arrow = $AnimatedSprite
 onready var result_icon = $ResultIcon
 
-var answer_color_val: int
-
-func _ready():
-	var color_controller = get_node("/root/Main/ColorController")
-	self.answer_color_val = color_controller.get_color_info_as_int()[self.color]
-
 func update_guess(guess: Dictionary):
 	self.text = str(guess.value)
 
-	if guess.value < self.answer_color_val:
+	var answer_color_val: int = get_node("/root/Main/ColorController") \
+		.get_color_info_as_int()[self.color]
+
+	if guess.value < answer_color_val:
 		self.arrow.frame = 0
-	elif guess.value > self.answer_color_val:
+	elif guess.value > answer_color_val:
 		self.arrow.frame = 1
 	else:
 		self.arrow.frame = 2

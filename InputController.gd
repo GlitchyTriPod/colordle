@@ -10,6 +10,9 @@ var current
 
 func _on_number_selected(number_val: int):
 
+	if self.current_input == null:
+		return
+
 	if number_val == -1:
 		var curr_text = self.current_input.text
 		curr_text.erase(
