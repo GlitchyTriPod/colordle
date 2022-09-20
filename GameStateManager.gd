@@ -2,8 +2,7 @@ extends Node
 
 class_name GameStateManager
 
-
-onready var Guess = preload("res://scenes/guess.tscn")
+# onready var Guess = preload("res://scenes/guess.tscn")
 onready var GuessResults = preload("res://enum/GuessResults.gd")
 
 onready var guess_holder = get_parent().get_node("Control/Guesses")
@@ -25,21 +24,17 @@ func set_guess_count(val):
 		display_answer()
 		self.guess_btn.text = "Play Again?"
 
-func _ready():
-	for gues in self.guess_holder.get_children():
-		gues.queue_free()
-
 func add_new_guess(guess_data: Dictionary):
 	if guess_count > 6:
 		return
-		
-	var guess = Guess.instance()
 
-	guess_holder.add_child(guess)
+	var chil = self.guess_holder.get_children()
 
-	yield(get_tree(), "idle_frame")
-	
-	guess.make_guess(guess_data)
+	for i in chil.size():
+		var guess = chil[i]
+		if guess.modulate == Color("#00ffffff"):
+			guess.make_guess(guess_data)
+			break		
 
 func check_guess():
 	# find guess that has not been submitted, get guess information
@@ -87,7 +82,6 @@ func check_guess():
 	elif !guess_results.has(GuessResults.GUESS_RESULTS.CLOSE):
 		self.win_msg.text = "Perfect win!"
 		self.guess_count = 6
-		# return
 	else:
 		self.win_msg.text = "You win! Go for a Perfect!"
 
@@ -132,7 +126,11 @@ func reset_game():
 	var guesses = self.guess_holder.get_children()
 
 	for i in guesses.size():
-		guesses[i].queue_free()
+		# guesses[i].queue_free()
+
+		guesses[i].modulate = Color("#00ffffff")
+
+		# pass
 
 # make guess
 func _on_Button_button_up():

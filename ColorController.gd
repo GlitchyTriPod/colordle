@@ -27,7 +27,7 @@ func update_color():
 	self.color_swatch.color = Color(self.target_red, self.target_green, self.target_blue)
 
 	for swatch in self.guess_swatches:
-		swatch.color = Color("#00ffffff")
+		swatch.color = Color("#00808080")
 	self.latest_guess.self_modulate = Color("#00ffffff")
 
 	if OS.has_feature("debug"):
@@ -47,6 +47,11 @@ func get_color_info_as_int():
 func add_guess_color(clr: Color):
 	self.latest_guess.self_modulate = clr
 	for swatch in self.guess_swatches:
-		if swatch.color == Color("#00ffffff"):
-			swatch.color = clr
-			break
+		if swatch.color == Color("#00808080"):
+			var twn: SceneTreeTween = get_tree().create_tween()
+			return twn.tween_property(
+				swatch,
+				"color",
+				clr,
+				0.3
+			)

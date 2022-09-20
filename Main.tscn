@@ -289,6 +289,11 @@ custom_styles/normal = ExtResource( 9 )
 text = "0"
 align = 1
 max_length = 3
+virtual_keyboard_enabled = false
+shortcut_keys_enabled = false
+middle_mouse_paste_enabled = false
+selecting_enabled = false
+deselect_on_focus_loss_enabled = false
 script = ExtResource( 7 )
 
 [node name="Green" type="LineEdit" parent="Control/ColorInput"]
@@ -300,6 +305,12 @@ custom_styles/focus = SubResource( 21 )
 custom_styles/normal = ExtResource( 5 )
 text = "0"
 align = 1
+max_length = 3
+virtual_keyboard_enabled = false
+shortcut_keys_enabled = false
+middle_mouse_paste_enabled = false
+selecting_enabled = false
+deselect_on_focus_loss_enabled = false
 script = ExtResource( 7 )
 
 [node name="Blue" type="LineEdit" parent="Control/ColorInput"]
@@ -311,6 +322,12 @@ custom_styles/focus = SubResource( 22 )
 custom_styles/normal = ExtResource( 6 )
 text = "0"
 align = 1
+max_length = 3
+virtual_keyboard_enabled = false
+shortcut_keys_enabled = false
+middle_mouse_paste_enabled = false
+selecting_enabled = false
+deselect_on_focus_loss_enabled = false
 script = ExtResource( 7 )
 
 [node name="Inputs" type="VBoxContainer" parent="Control"]
