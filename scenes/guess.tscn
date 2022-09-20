@@ -93,3 +93,5 @@ frames = SubResource( 4 )
 
 [node name="ResultIcon" parent="Blue" instance=ExtResource( 9 )]
 position = Vector2( -29, 33 )
+
+[node name="Tween" type="Tween" parent="."]
